@@ -2,20 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "./package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "zeroConfig": true,
-        "framework": "vite",
-        "distDir": "dist"
-      }
+      "src": "package.json",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/(.*\\.(js|css|ico))", "dest": "/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
     "REACT_APP_API_URL": "https://uvwzzago.manus.space/login",
